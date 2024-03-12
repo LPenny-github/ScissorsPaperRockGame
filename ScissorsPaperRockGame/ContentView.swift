@@ -21,6 +21,10 @@ struct ContentView: View {
     
     @State var wins = 0
     @State var round = 0
+    @State var userPaperCount = 0
+    @State var userScissorCount = 0
+    @State var userRockCount = 0
+    
     var body: some View {
         GeometryReader { geo in
             VStack {
@@ -51,6 +55,9 @@ struct ContentView: View {
                                 
                                 // check if win
                                 CheckGameResault(playerChoice: choice)
+                                
+                                // 紀錄使用者出什麼
+                                CalculateUserPreference(userChoice: choice)
                             }){
                                 Text(choice.rawValue)
                             }.font(.system(size: geo.size.width/CGFloat(Choices.allCases.count)))
@@ -64,6 +71,16 @@ struct ContentView: View {
                         Text("rounds: \(round)")
                         Spacer()
                     }
+                    HStack{ Spacer()}
+                    HStack{
+                        Spacer()
+                        Text("papers: \(userPaperCount)")
+                        Spacer()
+                        Text("scissors: \(userScissorCount)")
+                        Spacer()
+                        Text("rocks: \(userRockCount)")
+                        Spacer()
+                    }
                 }.frame(width: geo.size.width, height: geo.size.height/2)
             }
         }
@@ -73,6 +90,17 @@ struct ContentView: View {
             }
         }
     }
+    func CalculateUserPreference(userChoice: Choices){
+        switch userChoice {
+        case .Paper:
+            userPaperCount += 1
+        case .Scissor:
+            userScissorCount += 1
+        case .Rock:
+            userRockCount += 1
+        }
+    }
+    
     func CheckGameResault(playerChoice: Choices){
         switch playerChoice {
         case .Paper:
