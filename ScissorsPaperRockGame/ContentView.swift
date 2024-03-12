@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum Choices: String, CaseIterable {
-    case Paper = "🖐️", Scissor = "✌️", Rock = "✊"
+    case Paper = "🖐️", Scissors = "✌️", Rock = "✊"
 }
 
 struct ContentView: View {
@@ -22,7 +22,7 @@ struct ContentView: View {
     @State var wins = 0
     @State var round = 0
     @State var userPaperCount = 0
-    @State var userScissorCount = 0
+    @State var userScissorsCount = 0
     @State var userRockCount = 0
     
     var body: some View {
@@ -76,7 +76,7 @@ struct ContentView: View {
                         Spacer()
                         Text("papers: \(userPaperCount)")
                         Spacer()
-                        Text("scissors: \(userScissorCount)")
+                        Text("scissors: \(userScissorsCount)")
                         Spacer()
                         Text("rocks: \(userRockCount)")
                         Spacer()
@@ -94,8 +94,8 @@ struct ContentView: View {
         switch userChoice {
         case .Paper:
             userPaperCount += 1
-        case .Scissor:
-            userScissorCount += 1
+        case .Scissors:
+            userScissorsCount += 1
         case .Rock:
             userRockCount += 1
         }
@@ -104,7 +104,7 @@ struct ContentView: View {
     func CheckGameResault(playerChoice: Choices){
         switch playerChoice {
         case .Paper:
-            if opponentChoice == .Scissor {
+            if opponentChoice == .Scissors {
                 gameResaultMessage = "Lose"
             } else if opponentChoice == .Rock {
                 gameResaultMessage = "Win"
@@ -112,7 +112,7 @@ struct ContentView: View {
             } else {
                 gameResaultMessage = "Tie"
             }
-        case .Scissor:
+        case .Scissors:
             if opponentChoice == .Rock {
                 gameResaultMessage = "Lose"
             } else if opponentChoice == .Paper {
@@ -124,7 +124,7 @@ struct ContentView: View {
         case .Rock:
             if opponentChoice == .Paper {
                 gameResaultMessage = "Lose"
-            } else if opponentChoice == .Scissor {
+            } else if opponentChoice == .Scissors {
                 gameResaultMessage = "Win"
                 wins += 1
             } else {
